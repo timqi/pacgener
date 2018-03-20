@@ -13,9 +13,18 @@ def parse_args():
             help='the proxy parameter in the pac file, for example,\
             "SOCKS5 127.0.0.1:1080;"', metavar='PROXY')
     parser.add_argument("-t", "--type", dest="type", default="PAC", 
-            choices=["PAC", "SURGE"],
+            choices=["PAC", "SURGE", "DNSMASQ"],
             help="the type of configure file format, default:PAC")
     return parser.parse_args()
+
+def parse_domains(input_file):
+    domains = set()
+    with open(input_file, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                domains.add(line)
+    return domains;
 
 def generate_pac(domains, proxy):
     with open("template.pac", "r") as f:
@@ -27,15 +36,6 @@ def generate_pac(domains, proxy):
     proxy_content = proxy_content.replace('__DOMAINS__', json.dumps(domains_dict, indent=2))
     return proxy_content
 
-def parse_domains(input_file):
-    domains = set()
-    with open(input_file, "r") as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                domains.add(line)
-    return domains;
-
 def generate_surge(domains):
     with open("template.surge", "r") as f:
         proxy_content = f.read()
@@ -45,14 +45,24 @@ def generate_surge(domains):
     proxy_content = proxy_content.replace('__DOMAINS__', domain_rules.strip())
     return proxy_content
 
+def generate_dnsmasq(domains, proxy):
+    proxy_content = ""
+    for domain in domains:
+        if not domain[0] == ".":
+            domain = "."+domain
+        proxy_content += "server=/{}/{}\n".format(domain, proxy) 
+        proxy_content += "ipset=/{}/gfwlist\n".format(domain) 
+    return proxy_content.strip()
 
 def main():
     args = parse_args()
     domains = parse_domains(args.input)
     if "PAC" == args.type:
         content = generate_pac(domains, args.proxy)
-    else:
+    elif "SURGE" == args.type:
         content = generate_surge(domains)
+    else:
+        content = generate_dnsmasq(domains, args.proxy)
     with open(args.output, "wb") as f:
         f.write(content.encode("utf8"))
 
