@@ -5,24 +5,14 @@ tw
 jp
 hk
 pl
-is
 me
 it
-si
-fo
-be
 io
 ai
-soy
-fr
-uk
-de
 kr
-sg
 ru
 
 kkex.com
-aicoin.com
 tradingview.com
 okex.com
 
@@ -35,33 +25,24 @@ reddit.com
 github.com
 githubusercontent.com
 yahoo.com
-messenger.com
 imgur.com
-dropbox.com
-dropboxusercontent.com
-dropboxapi.com
 pinterest.com
 w3schools.com
 instagram.com
+cdninstagram.com
 tumblr.com
 medium.com
 twitter.com
 twimg.com
 archive.org
 facebook.com
-
-nytimes.com
-wsj.com
-
-godoc.org
+messenger.com
 bit.ly
-apkpure.com
 
 t66y.com
 pornhub.com
 xvideos.com
 
-cdninstagram.com
 googleapis.com
 gmail.com
 blogspot.com
