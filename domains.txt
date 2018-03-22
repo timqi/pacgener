@@ -1,6 +1,7 @@
 org
 co
 net
+ca
 tw
 jp
 hk
@@ -50,7 +51,10 @@ gstatic.com
 googleusercontent.com
 googleweblight.com
 googleapis.cn
-youtube.com
 android.com
 goo.gl
 google.com
+youtube.com
+googlevideo.com
+ytimg.com
+ggpht.com
